@@ -18,3 +18,5 @@ A volume controller using hand tracking with Python using `tkinter`, `cv2`, `med
 
 # How does the program work?
 
+The program will initiate once the user displays five fingers
+![Rec 0011](https://github.com/Abbas-Ghazavi/Volume-Controller-using-Hand-Tracking/assets/118556497/30d054e9-8e26-4e06-bdc8-7592f8a818fa)
