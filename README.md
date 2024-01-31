@@ -16,8 +16,6 @@ A volume controller using hand tracking with Python using `tkinter`, `cv2`, `med
    pip install pycaw==20230407
    pip install comtypes==1.2.1
 
-
-
 ## How does the program work?
 
 - The program will initiate once the user displays five fingers
