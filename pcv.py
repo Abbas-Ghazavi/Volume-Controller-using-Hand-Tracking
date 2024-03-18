@@ -14,7 +14,6 @@ from comtypes import CLSCTX_ALL
 class WebcamApp:
     def __init__(self, root):
         
-        # GUI
         self.root = root
         self.root.title(" Volume Controller ")
         self.root.resizable(False, False)
@@ -26,16 +25,12 @@ class WebcamApp:
         if not self.cap.isOpened():
             raise RuntimeError("Could not open the camera. Please check if it's connected.")
 
-        # Create main frame
         self.frame = ttk.Frame(root)
         self.frame.pack()
 
-        # Canvas for displaying frames
         self.canvas = tk.Canvas(self.frame, width=int(self.cap.get(4)) - 100, height=int(self.cap.get(4)) - 100)
         self.canvas.grid(row=0, column=0)
-
-
-        # Meter for displaying volume
+        
         volume_frame = ttk.Frame(self.frame)
         volume_frame.grid(row=0, column=1)
     
@@ -53,17 +48,14 @@ class WebcamApp:
         )
         self.meter.pack(fill=tk.BOTH, expand=tk.YES, padx=10, pady=10)
 
-        # Label 
         self.status_label = tk.Label(self.frame, text="Stop", font="-size 10 -weight bold", bg="black", fg="red")
         self.status_label.place(x=476, y=275)
 
-        # Audio Control 
         devices = AudioUtilities.GetSpeakers()
         interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         self.volume = cast(interface, POINTER(IAudioEndpointVolume))
         self.volMin, self.volMax = self.volume.GetVolumeRange()[:2]
 
-        # Hand Tracking 
         mpHands = mp.solutions.hands
         self.hands = mpHands.Hands()
 
@@ -76,12 +68,9 @@ class WebcamApp:
         self.beta = 0.5
         self.volume_buffer = [0] * self.buffer_size
 
-
-        # Start capturing frames
         self.img = None
         self.update()
         
-        # Volume meter setup
         self.volume_thread = self.VolumeThread(self.get_system_volume, self.on_volume_change)
         self.volume_thread.start()
 
@@ -167,9 +156,7 @@ class WebcamApp:
             self.status_label.config(text="Running", fg="green")
         else:
             self.status_label.config(text="Stop", fg="red")
-        
-
-
+            
 root = ttk.Window()
 app = WebcamApp(root)
 root.mainloop()
