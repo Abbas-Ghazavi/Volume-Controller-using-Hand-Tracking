@@ -156,7 +156,8 @@ class WebcamApp:
             self.status_label.config(text="Running", fg="green")
         else:
             self.status_label.config(text="Stop", fg="red")
-            
+
+
 root = ttk.Window()
 app = WebcamApp(root)
 root.mainloop()
